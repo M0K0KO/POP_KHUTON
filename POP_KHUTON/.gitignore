@@ -10,6 +10,8 @@
 .utmp/
 /[Mm]emoryCaptures/
 /[Rr]ecordings/
+Assembly-Csharp.csproj
+Assembly-Csharp-Editor.csproj
 
 # Unity3D generated meta files
 *.pidb.meta
