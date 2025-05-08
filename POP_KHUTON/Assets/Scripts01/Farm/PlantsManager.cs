@@ -6,8 +6,12 @@ using InvalidOperationException = System.InvalidOperationException;
 
 public class PlantsManager : MonoBehaviour
 {
+    private int rowSize = 0;
+    private int colSize = 0;
     private Plant[,] plantList;
     private Farm farm;
+    
+    private float cellSize = 2f;
 
     public GameObject plantPrefab;
     
@@ -47,13 +51,13 @@ public class PlantsManager : MonoBehaviour
     // Farm Breadth, Width 값 기반으로 한 2차원 배열 PlantList생성
     private void MakePlantsList()
     {
-        plantList = new Plant[(int)farm.farmWidth, (int)farm.farmBreadth];
+        rowSize = (int)(farm.farmWidth / cellSize);
+        colSize = (int)(farm.farmBreadth / cellSize);
+        plantList = new Plant[rowSize, colSize];
     }
     
     private Vector3 plantPosition(int x, int z)
     {
-        float cellSize = 1f;
-        
         Vector3 topLeftCorner = new Vector3(
             transform.position.x - (farm.farmWidth / 2f), 
             transform.position.y,
@@ -70,9 +74,9 @@ public class PlantsManager : MonoBehaviour
     
     public void AddPlant(Plant plant)
     {
-        for (int x = 0; x < farm.farmWidth; x++)
+        for (int x = 0; x < rowSize; x++)
         {
-            for (int y = 0; y < farm.farmBreadth; y++)
+            for (int y = 0; y < colSize; y++)
             {
                 if (plantList[x, y] == null)
                 {
