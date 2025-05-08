@@ -6,14 +6,19 @@ using InvalidOperationException = System.InvalidOperationException;
 
 public class PlantsManager : MonoBehaviour
 {
-    private Plant[,] plantList;
+    private int rowSize = 0;
+    private int colSize = 0;
+    public Plant[,] plantList;
     private Farm farm;
+
+    private float cellSize;
 
     public GameObject plantPrefab;
     
     private void Awake()
     {
         farm = GetComponent<Farm>();
+        cellSize = farm.cellSize;
     }
 
     private void Start()
@@ -21,39 +26,22 @@ public class PlantsManager : MonoBehaviour
         MakePlantsList();
     }
 
+    ////////////////////////////
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            GameObject instantiatedPlant = Instantiate(plantPrefab, transform.position, Quaternion.identity);
-        }
-    }
 
-    private void OnEnable()
-    {
-        Plant.OnPlantCreated += HandlePlantCreated;
     }
+    ////////////////////////////
 
-    private void OnDisable()
-    {
-        Plant.OnPlantCreated -= HandlePlantCreated;
-    }
-
-    private void HandlePlantCreated(Plant plant)
-    {
-        AddPlant(plant);
-    }
-
-    // Farm Breadth, Width 값 기반으로 한 2차원 배열 PlantList생성
     private void MakePlantsList()
     {
-        plantList = new Plant[(int)farm.farmWidth, (int)farm.farmBreadth];
+        rowSize = (int)(farm.farmWidth / cellSize);
+        colSize = (int)(farm.farmBreadth / cellSize);
+        plantList = new Plant[rowSize, colSize];
     }
     
     private Vector3 plantPosition(int x, int z)
     {
-        float cellSize = 1f;
-        
         Vector3 topLeftCorner = new Vector3(
             transform.position.x - (farm.farmWidth / 2f), 
             transform.position.y,
@@ -68,26 +56,37 @@ public class PlantsManager : MonoBehaviour
     }
 
     
-    public void AddPlant(Plant plant)
+    
+    //Instantiate 될 때 자동으로 호출
+    public void AddPlant(int row, int col)
     {
-        for (int x = 0; x < farm.farmWidth; x++)
+        GameObject instantiatedPlant = Instantiate(plantPrefab, transform.position, Quaternion.identity);
+        Plant plant = instantiatedPlant.GetComponent<Plant>();
+        
+        if (plantList[row, col] == null)
         {
-            for (int y = 0; y < farm.farmBreadth; y++)
-            {
-                if (plantList[x, y] == null)
-                {
-                    plantList[x, y] = plant;
-                    Vector3 localPosition = plantPosition(x, y);
+            plantList[row, col] = plant;
+            Vector3 localPosition = plantPosition(row, col);
                     
-                    plant.transform.SetParent(transform);
-                    plant.transform.localPosition = localPosition;
+            plant.transform.SetParent(transform);
+            plant.transform.localPosition = localPosition;
                     
-                    plant.plantInfo.currentCoordinate = new PlantCoordinate(x, y);
-                    Debug.Log($"식물이 ({x}, {y}) 위치에 추가되었습니다. 로컬 위치: {localPosition}");
+            plant.plantInfo.currentCoordinate = new PlantCoordinate(row, col);
 
-                    return;
-                }
-            }
+            return;
+        }
+        return;
+    }
+
+    //
+    public void UpdatePlant(Plant plant, int row, int col, PlantType plantType, PlantLevel plantLevel)
+    {
+        if (plantList[row, col] != null)
+        {
+            plantList[row, col].plantController.ChangeType(plantType);
+            plantList[row, col].plantController.ChangeLevel(plantLevel);
+
+            plant.plantController.currentOutline.enabled = false;
         }
     }
 }
