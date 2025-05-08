@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class Plant : MonoBehaviour
 {
-    public static event Action<Plant> OnPlantCreated;
-    
     public PlantInfo plantInfo;
     public PlantController plantController;
     
@@ -14,10 +12,5 @@ public class Plant : MonoBehaviour
     {
         plantInfo = GetComponent<PlantInfo>();
         plantController = GetComponent<PlantController>();
-    }
-
-    private void Start()
-    {
-        OnPlantCreated?.Invoke(this);
     }
 }

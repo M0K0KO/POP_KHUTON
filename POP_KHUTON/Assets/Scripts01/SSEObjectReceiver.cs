@@ -5,7 +5,8 @@ using System.Net.Http;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using System; // Required for Action
+using System;
+using UnityEngine.PlayerLoop; // Required for Action
 
 /// <summary>
 /// Data structure for an individual detected object, matching the server's JSON format.
@@ -211,7 +212,34 @@ public class SSEObjectReceiver : MonoBehaviour
                 foreach (NewDetectedObjectInfo objInfo in objectsInSector)
                 {
                     if (objInfo.sector_row == null) continue;
+
+                    if (Farm.instance.plantsManager.plantList[objInfo.sector_row, objInfo.sector_col] == null)
+                    {
+                        Farm.instance.plantsManager.AddPlant(objInfo.sector_row, objInfo.sector_col);
+                    }
+
+                    PlantType type = PlantType.Cabbage;
+                    if (objInfo.ObjectType == "cabbage") type = PlantType.Cabbage;
+                    else if (objInfo.ObjectType == "tomato") type = PlantType.Tomato;
+                    else if (objInfo.ObjectType == "eggplant") type = PlantType.Eggplant;
+
+                    PlantLevel lv = PlantLevel.Lv1;
+                    if (objInfo.Level == "v1") lv = PlantLevel.Lv1;
+                    else if (objInfo.Level == "v2") lv = PlantLevel.Lv2;
+                    else if (objInfo.Level == "v3") lv = PlantLevel.Lv3;
+                    else if (objInfo.Level == "v4") lv = PlantLevel.Lv4;
+
+                    Debug.Log(objInfo.ObjectType);
+                    Debug.Log(objInfo.Level);
                     
+                    Farm.instance.plantsManager.UpdatePlant(
+                        Farm.instance.plantsManager.plantList[objInfo.sector_row, objInfo.sector_col],
+                        objInfo.sector_row,
+                        objInfo.sector_col,
+                        type,
+                        lv
+                    );
+
                     // Access objInfo.sector_row, objInfo.sector_col, objInfo.Level, objInfo.ObjectType
                     // Example:
                     // Debug.Log($"  - Row: {objInfo.sector_row}, Col: {objInfo.sector_col}, Lv: {objInfo.Level}, Type: {objInfo.ObjectType}");

@@ -8,7 +8,7 @@ public class PlantsManager : MonoBehaviour
 {
     private int rowSize = 0;
     private int colSize = 0;
-    private Plant[,] plantList;
+    public Plant[,] plantList;
     private Farm farm;
     
     private float cellSize = 2f;
@@ -28,31 +28,9 @@ public class PlantsManager : MonoBehaviour
     ////////////////////////////
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            GameObject instantiatedPlant = Instantiate(plantPrefab, transform.position, Quaternion.identity);
-        }
+
     }
     ////////////////////////////
-
-    private void OnEnable()
-    {
-        Plant.OnPlantCreated += HandlePlantCreated;
-    }
-
-    private void OnDisable()
-    {
-        Plant.OnPlantCreated -= HandlePlantCreated;
-    }
-
-    private void HandlePlantCreated(Plant plant)
-    {
-        // 이후 받은 정보로 초기화 할 예정
-        plant.plantController.ChangeType(PlantType.Cabbage);
-        plant.plantController.ChangeLevel(PlantLevel.Lv3);
-        AddPlant(plant);
-        // 이후 받은 정보로 초기화 할 예정
-    }
 
     private void MakePlantsList()
     {
@@ -78,29 +56,36 @@ public class PlantsManager : MonoBehaviour
 
     
     
-    // 이후 받는 정보 기반으로 배치할 예정
-    public void AddPlant(Plant plant)
+    //Instantiate 될 때 자동으로 호출
+    public void AddPlant(int row, int col)
     {
-        for (int x = 0; x < rowSize; x++)
+        GameObject instantiatedPlant = Instantiate(plantPrefab, transform.position, Quaternion.identity);
+        Plant plant = instantiatedPlant.GetComponent<Plant>();
+        
+        if (plantList[row, col] == null)
         {
-            for (int y = 0; y < colSize; y++)
-            {
-                if (plantList[x, y] == null)
-                {
-                    plantList[x, y] = plant;
-                    Vector3 localPosition = plantPosition(x, y);
+            plantList[row, col] = plant;
+            Vector3 localPosition = plantPosition(row, col);
                     
-                    plant.transform.SetParent(transform);
-                    plant.transform.localPosition = localPosition;
+            plant.transform.SetParent(transform);
+            plant.transform.localPosition = localPosition;
                     
-                    plant.plantInfo.currentCoordinate = new PlantCoordinate(x, y);
-                    Debug.Log($"식물이 ({x}, {y}) 위치에 추가되었습니다. 로컬 위치: {localPosition}");
+            plant.plantInfo.currentCoordinate = new PlantCoordinate(row, col);
 
-                    return;
-                }
-            }
+            return;
         }
-
         return;
+    }
+
+    //
+    public void UpdatePlant(Plant plant, int row, int col, PlantType plantType, PlantLevel plantLevel)
+    {
+        if (plantList[row, col] != null)
+        {
+            plantList[row, col].plantController.ChangeType(plantType);
+            plantList[row, col].plantController.ChangeLevel(plantLevel);
+
+            plant.plantController.currentOutline.enabled = false;
+        }
     }
 }
