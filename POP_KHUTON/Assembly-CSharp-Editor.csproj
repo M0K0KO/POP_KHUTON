@@ -417,16 +417,16 @@
       <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Library\PackageCache\com.unity.ext.nunit@031a54704bff\net40\unity-custom\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="unityplastic">
-      <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Library\PackageCache\com.unity.collab-proxy@50ac96531b63\Lib\Editor\unityplastic.dll</HintPath>
+      <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Library\PackageCache\com.unity.collab-proxy@946053a44d19\Lib\Editor\unityplastic.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Plastic.Antlr3.Runtime">
-      <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Library\PackageCache\com.unity.collab-proxy@50ac96531b63\Lib\Editor\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
+      <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Library\PackageCache\com.unity.collab-proxy@946053a44d19\Lib\Editor\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Plastic.Newtonsoft.Json">
-      <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Library\PackageCache\com.unity.collab-proxy@50ac96531b63\Lib\Editor\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
+      <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Library\PackageCache\com.unity.collab-proxy@946053a44d19\Lib\Editor\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="log4netPlastic">
-      <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Library\PackageCache\com.unity.collab-proxy@50ac96531b63\Lib\Editor\log4netPlastic.dll</HintPath>
+      <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Library\PackageCache\com.unity.collab-proxy@946053a44d19\Lib\Editor\log4netPlastic.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.IonicZip">
       <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Library\PackageCache\com.unity.visualscripting@7dcdc439b230\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll</HintPath>
