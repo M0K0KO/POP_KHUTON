@@ -4,8 +4,6 @@ using UnityEngine;
 public class PlantOnHover : MonoBehaviour
 {
     private Plant plant;
-    public Material material;
-    private Color originalOutlineColor;
     private bool isHovering = false;
 
 
@@ -14,29 +12,20 @@ public class PlantOnHover : MonoBehaviour
         plant = GetComponent<Plant>();
     }
 
-    void Start()
+    private void Update()
     {
-        material = plant.plantController.currentActiveRenderer.material;
-        originalOutlineColor = material.GetColor("_OutlineColor");
-
-        Color invisibleOutline = originalOutlineColor;
-        invisibleOutline.a = 0;
-        material.SetColor("_OutlineColor", invisibleOutline);
+        Debug.Log(isHovering);
     }
 
     private void OnMouseEnter()
     {
         isHovering = true;
-        Color visibleOutline = originalOutlineColor;
-        visibleOutline.a = 1;
-        material.SetColor("_OutlineColor", visibleOutline);
+        plant.plantController.currentOutline.enabled = true;
     }
     
     private void OnMouseExit()
     {
         isHovering = false;
-        Color invisibleOutline = originalOutlineColor;
-        invisibleOutline.a = 0;
-        material.SetColor("_OutlineColor", invisibleOutline);
+        plant.plantController.currentOutline.enabled = false;
     }
 }

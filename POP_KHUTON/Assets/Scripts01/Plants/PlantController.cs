@@ -1,10 +1,12 @@
 using System;
+using cakeslice;
 using UnityEngine;
 
 public class PlantController : MonoBehaviour
 {
     private Plant plant;
     public MeshRenderer currentActiveRenderer;
+    public Outline currentOutline;
     
     private void Awake()
     {
@@ -50,6 +52,7 @@ public class PlantController : MonoBehaviour
 
         MeshRenderer targetMesh = transform.Find(currentType + "_" + currentLevel).GetComponent<MeshRenderer>();
         currentActiveRenderer = targetMesh;
+        currentOutline = targetMesh.GetComponent<Outline>();
         targetMesh.enabled = true;
     }
 
@@ -62,6 +65,7 @@ public class PlantController : MonoBehaviour
 
         MeshRenderer targetMesh = transform.Find(currentType + "_" + currentLevel).GetComponent<MeshRenderer>();
         currentActiveRenderer = targetMesh;
+        currentOutline = targetMesh.GetComponent<Outline>();
         targetMesh.enabled = true;
     }
     
