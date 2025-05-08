@@ -47,7 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts01\Farm\Farm.cs" />
-    <Compile Include="Assets\Scripts\UI\LoginController.cs" />
+    <Compile Include="Assets\Scripts\UI\SimpleRegistrationManager.cs" />
     <Compile Include="Assets\Scripts01\Plants\PlantInfo.cs" />
     <Compile Include="Assets\Scripts01\PlantSystemTester.cs" />
     <Compile Include="Assets\Scripts\UI\UIController.cs" />
@@ -64,6 +64,7 @@
     <None Include="Assets\Imports\GUI-MonoRound\ResourcesData\Fonts\GNU Lesser General Public License.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\SDFFunctions.hlsl" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
+    <None Include="Assets\UI Toolkit\HelloVue.uxml" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
