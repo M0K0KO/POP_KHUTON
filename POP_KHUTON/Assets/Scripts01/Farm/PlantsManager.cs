@@ -25,6 +25,7 @@ public class PlantsManager : MonoBehaviour
         MakePlantsList();
     }
 
+    ////////////////////////////
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -32,6 +33,7 @@ public class PlantsManager : MonoBehaviour
             GameObject instantiatedPlant = Instantiate(plantPrefab, transform.position, Quaternion.identity);
         }
     }
+    ////////////////////////////
 
     private void OnEnable()
     {
@@ -45,10 +47,13 @@ public class PlantsManager : MonoBehaviour
 
     private void HandlePlantCreated(Plant plant)
     {
+        // 이후 받은 정보로 초기화 할 예정
+        plant.plantController.ChangeType(PlantType.Cabbage);
+        plant.plantController.ChangeLevel(PlantLevel.Lv3);
         AddPlant(plant);
+        // 이후 받은 정보로 초기화 할 예정
     }
 
-    // Farm Breadth, Width 값 기반으로 한 2차원 배열 PlantList생성
     private void MakePlantsList()
     {
         rowSize = (int)(farm.farmWidth / cellSize);
@@ -72,6 +77,8 @@ public class PlantsManager : MonoBehaviour
     }
 
     
+    
+    // 이후 받는 정보 기반으로 배치할 예정
     public void AddPlant(Plant plant)
     {
         for (int x = 0; x < rowSize; x++)
@@ -93,5 +100,7 @@ public class PlantsManager : MonoBehaviour
                 }
             }
         }
+
+        return;
     }
 }
