@@ -4,7 +4,8 @@ using UnityEngine;
 public class PlantController : MonoBehaviour
 {
     private Plant plant;
-
+    public MeshRenderer currentActiveRenderer;
+    
     private void Awake()
     {
         plant = GetComponent<Plant>();
@@ -48,6 +49,7 @@ public class PlantController : MonoBehaviour
         PlantLevel currentLevel = plant.plantInfo.plantLevel;
 
         MeshRenderer targetMesh = transform.Find(currentType + "_" + currentLevel).GetComponent<MeshRenderer>();
+        currentActiveRenderer = targetMesh;
         targetMesh.enabled = true;
     }
 
@@ -59,6 +61,7 @@ public class PlantController : MonoBehaviour
         PlantLevel currentLevel = plant.plantInfo.plantLevel;
 
         MeshRenderer targetMesh = transform.Find(currentType + "_" + currentLevel).GetComponent<MeshRenderer>();
+        currentActiveRenderer = targetMesh;
         targetMesh.enabled = true;
     }
     
