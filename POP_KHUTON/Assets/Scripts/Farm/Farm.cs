@@ -14,8 +14,8 @@ public class Farm : MonoBehaviour
         meshRenderer = GetComponent<MeshRenderer>();
         plantsManager = GetComponent<PlantsManager>();
         
-        farmBreadth = meshRenderer.bounds.size.x;
-        farmWidth = meshRenderer.bounds.size.z;
+        farmWidth = meshRenderer.bounds.size.x;
+        farmBreadth = meshRenderer.bounds.size.z;
     }
 
     private void Start()

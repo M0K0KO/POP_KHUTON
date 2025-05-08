@@ -19,16 +19,13 @@ public class PlantsManager : MonoBehaviour
     private void Start()
     {
         MakePlantsList();
-
-        plantPosition(0, 0);
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            GameObject testPlant = Instantiate(plantPrefab, Vector3.zero, Quaternion.identity);
-            AddPlant(testPlant.GetComponent<Plant>());
+            GameObject instantiatedPlant = Instantiate(plantPrefab, transform.position, Quaternion.identity);
         }
     }
 
@@ -44,78 +41,53 @@ public class PlantsManager : MonoBehaviour
 
     private void HandlePlantCreated(Plant plant)
     {
-        Vector2Int position = AddPlant(plant);
+        AddPlant(plant);
     }
 
     // Farm Breadth, Width 값 기반으로 한 2차원 배열 PlantList생성
     private void MakePlantsList()
     {
-        plantList = new Plant[(int)farm.farmBreadth, (int)farm.farmWidth];
+        plantList = new Plant[(int)farm.farmWidth, (int)farm.farmBreadth];
     }
     
-    private Vector3 plantPosition(int x, int y)
+    private Vector3 plantPosition(int x, int z)
     {
         float cellSize = 1f;
         
         Vector3 topLeftCorner = new Vector3(
-            transform.position.x - (farm.farmBreadth / 2f), 
+            transform.position.x - (farm.farmWidth / 2f), 
             transform.position.y,
-            transform.position.z - (farm.farmWidth / 2f));
+            transform.position.z - (farm.farmBreadth / 2f));
+
+        float normalizedX = (topLeftCorner.x + ((cellSize / 2f) + (x * cellSize))) / farm.farmWidth;
+        float normalizedZ = (topLeftCorner.z + ((cellSize / 2f) + (z * cellSize))) / farm.farmBreadth;
+
+        Debug.Log(topLeftCorner);
         
-        float normalizedX = (topLeftCorner.x + ((cellSize / 2f) * (1 + (x * cellSize))));
-        float normalizedZ = (topLeftCorner.z + ((cellSize / 2f) * (1 + (y * cellSize))));
-
-        Renderer renderer = GetComponent<Renderer>();
-        Bounds bounds = renderer.bounds;
-
-        float minX = bounds.min.x;
-        float maxX = bounds.max.x;
-        float minZ = bounds.min.z;
-        float maxZ = bounds.max.z;
-
-        float resultX = ((normalizedX - minX) / (maxX - minX)) - 0.5f;
-        float resultZ = ((normalizedZ - minZ) / (maxZ - minZ)) - 0.5f;
-        
-        return new Vector3(resultX, transform.position.y + 0.5f, resultZ);
+        return new Vector3(normalizedX, transform.position.y + 0.5f, normalizedZ);
     }
 
     
-    public Vector2Int AddPlant(Plant plant)
+    public void AddPlant(Plant plant)
     {
-        for (int y = 0; y < farm.farmBreadth; y++)
+        for (int x = 0; x < farm.farmWidth; x++)
         {
-            for (int x = 0; x < farm.farmWidth; x++)
+            for (int y = 0; y < farm.farmBreadth; y++)
             {
-                if (plantList[y, x] == null)
+                if (plantList[x, y] == null)
                 {
-                    plantList[y, x] = plant;
-                
+                    plantList[x, y] = plant;
                     Vector3 localPosition = plantPosition(x, y);
-                
-                    if (plant.transform.parent != transform)
-                    {
-                        Vector3 worldPos = plant.transform.position;
-                        plant.transform.SetParent(transform);
                     
-                        plant.transform.localPosition = localPosition;
-                    }
-                    else
-                    {
-                        plant.transform.localPosition = localPosition;
-                    }
-                
-                    if (plant.TryGetComponent(out PlantInfo plantInfo))
-                    {
-                        plantInfo.currentCoordinate = new PlantCoordinate(x, y);
-                    }
-                
+                    plant.transform.SetParent(transform);
+                    plant.transform.localPosition = localPosition;
+                    
+                    plant.plantInfo.currentCoordinate = new PlantCoordinate(x, y);
                     Debug.Log($"식물이 ({x}, {y}) 위치에 추가되었습니다. 로컬 위치: {localPosition}");
-                    return new Vector2Int(x, y); 
+
+                    return;
                 }
             }
         }
-    
-        // 빈 공간이 없는 경우
-        throw new InvalidOperationException("모든 그리드 공간이 채워져 있습니다. 더 이상 식물을 추가할 수 없습니다.");
     }
 }
