@@ -4,19 +4,21 @@ using UnityEngine;
 
 public class UIController : MonoBehaviour
 {
+    public SimpleRegistrationManager registrationManager;
+    
     public AudioSource audioSource;
     public AudioClip buttonSound;
     
     public GameObject loginPanel;
     public GameObject loginFrame;
-    public TMP_Text username;
-    public TMP_Text password;
+    public TMP_InputField usernameInput;
+    public TMP_InputField passwordInput;
 
     public GameObject signUpPanel;
     public GameObject signUpFrame;
-    public TMP_Text signUpNickname;
-    public TMP_Text signUpUsername;
-    public TMP_Text signUpPassword;
+    public TMP_InputField signUpNicknameInput;
+    public TMP_InputField signUpUsernameInput;
+    public TMP_InputField signUpPasswordInput;
 
     public GameObject mainPanel;
     
@@ -71,5 +73,7 @@ public class UIController : MonoBehaviour
             signUpPanel.GetComponent<CanvasGroup>().blocksRaycasts = true;
             signUpPanel.SetActive(false);
         }));
+        
+        registrationManager.RegisterUser(signUpUsernameInput.text, signUpPasswordInput.text, signUpNicknameInput.text, registrationManager.HandleRegistrationResult);
     }
 }

@@ -1220,6 +1220,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 386493287}
   m_CullTransparentMesh: 0
+--- !u!1 &475628973
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 475628975}
+  - component: {fileID: 475628974}
+  m_Layer: 0
+  m_Name: RegistrationManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &475628974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475628973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b763714c74faf4a45aad7d17a54c20ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statusText: {fileID: 0}
+  registerButton: {fileID: 0}
+--- !u!4 &475628975
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475628973}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &486912608
 GameObject:
   m_ObjectHideFlags: 0
@@ -4893,17 +4939,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60080c2e52d16f64e9cd6b1a38f18d28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  registrationManager: {fileID: 475628974}
   audioSource: {fileID: 1596458984}
   buttonSound: {fileID: 8300000, guid: 8ad734fce0f43064fa29520aff69115a, type: 3}
   loginPanel: {fileID: 1210160105}
   loginFrame: {fileID: 109450703}
-  username: {fileID: 6939842492147375028}
-  password: {fileID: 6939842491204644266}
+  usernameInput: {fileID: 6939842491326721749}
+  passwordInput: {fileID: 6939842492050196632}
   signUpPanel: {fileID: 150594305}
   signUpFrame: {fileID: 565495495}
-  signUpNickname: {fileID: 1920292806}
-  signUpUsername: {fileID: 486912610}
-  signUpPassword: {fileID: 1460304544}
+  signUpNicknameInput: {fileID: 1653177767}
+  signUpUsernameInput: {fileID: 1066106650}
+  signUpPasswordInput: {fileID: 386493289}
   mainPanel: {fileID: 1351177148}
 --- !u!82 &1596458984
 AudioSource:
@@ -8595,3 +8642,4 @@ SceneRoots:
   - {fileID: 2116725178}
   - {fileID: 1596458982}
   - {fileID: 43358928}
+  - {fileID: 475628975}
