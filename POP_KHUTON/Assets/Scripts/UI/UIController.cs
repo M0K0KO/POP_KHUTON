@@ -73,7 +73,27 @@ public class UIController : MonoBehaviour
             signUpPanel.GetComponent<CanvasGroup>().blocksRaycasts = true;
             signUpPanel.SetActive(false);
         }));
+
+        registrationManager.RegisterUser(signUpUsernameInput.text, signUpPasswordInput.text,
+            signUpNicknameInput.text, registrationManager.HandleRegistrationResult);
         
-        registrationManager.RegisterUser(signUpUsernameInput.text, signUpPasswordInput.text, signUpNicknameInput.text, registrationManager.HandleRegistrationResult);
     }
+
+    public void OnSignUpExitClick()
+    {
+        audioSource.PlayOneShot(buttonSound);
+        loginFrame.SetActive(true);
+        loginFrame.GetComponent<CanvasGroup>().alpha = 1;
+        loginFrame.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        signUpPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        signUpPanel.GetComponent<CanvasGroup>().DOFade(0, 0.4f).OnComplete((() =>
+        {
+            loginFrame.GetComponent<CanvasGroup>().blocksRaycasts = true;
+            signUpPanel.GetComponent<CanvasGroup>().blocksRaycasts = true;
+            signUpPanel.SetActive(false);
+        }));
+
+    }
+    
+    
 }

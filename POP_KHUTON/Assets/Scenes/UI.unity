@@ -3775,7 +3775,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1596458983}
         m_TargetAssemblyTypeName: UIController, Assembly-CSharp
-        m_MethodName: OnSignUpCompleteClick
+        m_MethodName: OnSignUpExitClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
