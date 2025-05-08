@@ -10,14 +10,15 @@ public class PlantsManager : MonoBehaviour
     private int colSize = 0;
     public Plant[,] plantList;
     private Farm farm;
-    
-    private float cellSize = 2f;
+
+    private float cellSize;
 
     public GameObject plantPrefab;
     
     private void Awake()
     {
         farm = GetComponent<Farm>();
+        cellSize = farm.cellSize;
     }
 
     private void Start()

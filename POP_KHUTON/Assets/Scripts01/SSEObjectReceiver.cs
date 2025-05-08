@@ -228,9 +228,6 @@ public class SSEObjectReceiver : MonoBehaviour
                     else if (objInfo.Level == "v2") lv = PlantLevel.Lv2;
                     else if (objInfo.Level == "v3") lv = PlantLevel.Lv3;
                     else if (objInfo.Level == "v4") lv = PlantLevel.Lv4;
-
-                    Debug.Log(objInfo.ObjectType);
-                    Debug.Log(objInfo.Level);
                     
                     Farm.instance.plantsManager.UpdatePlant(
                         Farm.instance.plantsManager.plantList[objInfo.sector_row, objInfo.sector_col],
