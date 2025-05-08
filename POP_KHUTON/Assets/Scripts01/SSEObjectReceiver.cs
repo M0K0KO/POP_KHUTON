@@ -201,7 +201,6 @@ public class SSEObjectReceiver : MonoBehaviour
 
         foreach (var sectorEntry in detectionData)
         {
-            Debug.Log(sectorEntry);
             string sectorKey = sectorEntry.Key; // e.g., "0-0", "1-2"
             List<NewDetectedObjectInfo> objectsInSector = sectorEntry.Value;
 
