@@ -431,14 +431,14 @@
     <Reference Include="nunit.framework">
       <HintPath>D:\2025_KHUTON\POP_KHUTON\POP_KHUTON\Library\PackageCache\com.unity.ext.nunit@031a54704bff\net40\unity-custom\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="DemiLib">
+      <HintPath>D:\2025_KHUTON\POP_KHUTON\POP_KHUTON\Assets\Plugins\Demigiant\DemiLib\Core\DemiLib.dll</HintPath>
+    </Reference>
     <Reference Include="DOTween">
       <HintPath>D:\2025_KHUTON\POP_KHUTON\POP_KHUTON\Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
     </Reference>
     <Reference Include="DOTweenPro">
       <HintPath>D:\2025_KHUTON\POP_KHUTON\POP_KHUTON\Assets\Plugins\Demigiant\DOTweenPro\DOTweenPro.dll</HintPath>
-    </Reference>
-    <Reference Include="DemiLib">
-      <HintPath>D:\2025_KHUTON\POP_KHUTON\POP_KHUTON\Assets\Plugins\Demigiant\DemiLib\Core\DemiLib.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.48f1\Editor\Data\NetStandard\ref\2.1.0\netstandard.dll</HintPath>
@@ -820,6 +820,9 @@
     </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>D:\2025_KHUTON\POP_KHUTON\POP_KHUTON\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>D:\2025_KHUTON\POP_KHUTON\POP_KHUTON\Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Multiplayer.Center.Common">
       <HintPath>D:\2025_KHUTON\POP_KHUTON\POP_KHUTON\Library\ScriptAssemblies\Unity.Multiplayer.Center.Common.dll</HintPath>
