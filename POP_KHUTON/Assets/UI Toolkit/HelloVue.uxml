@@ -1,6 +1,7 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/USS/USSTest.uss?fileID=7433441132597879392&amp;guid=0908fd2b96bcde6408b704722732e6f4&amp;type=3#USSTest" />
     <ui:VisualElement style="flex-grow: 1; justify-content: center; align-items: center;">
-        <ui:Label text="Label" style="width: 10%; height: 5%; -unity-text-align: middle-center; -unity-font-style: bold; font-size: 50px;" />
-        <ui:Button text="Button" name="Button" style="width: 10%; height: 5%; font-size: 50px;" />
+        <ui:Label text="Label" name="Count" style="width: 10%; height: 5%; -unity-text-align: middle-center; -unity-font-style: bold; font-size: 50px;" />
+        <ui:Button text="Add&#10;" name="AddBtn" style="width: 10%; height: 5%; font-size: 50px;" />
     </ui:VisualElement>
 </ui:UXML>
