@@ -788,6 +788,9 @@
     <Reference Include="Unity.Multiplayer.Center.Editor">
       <HintPath>D:\2025_KHUTON\POP_KHUTON\POP_KHUTON\Library\ScriptAssemblies\Unity.Multiplayer.Center.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.InputSystem.ForUI">
+      <HintPath>D:\2025_KHUTON\POP_KHUTON\POP_KHUTON\Library\ScriptAssemblies\Unity.InputSystem.ForUI.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>D:\2025_KHUTON\POP_KHUTON\POP_KHUTON\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
     </Reference>
@@ -802,6 +805,9 @@
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>D:\2025_KHUTON\POP_KHUTON\POP_KHUTON\Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.InputSystem">
+      <HintPath>D:\2025_KHUTON\POP_KHUTON\POP_KHUTON\Library\ScriptAssemblies\Unity.InputSystem.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>D:\2025_KHUTON\POP_KHUTON\POP_KHUTON\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
