@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using Unity.Mathematics;
 using UnityEngine;
 using InvalidOperationException = System.InvalidOperationException;
@@ -67,11 +68,18 @@ public class PlantsManager : MonoBehaviour
         {
             plantList[row, col] = plant;
             Vector3 localPosition = plantPosition(row, col);
-                    
-            plant.transform.SetParent(transform);
+            localPosition.x *= farm.farmWidth;
+            localPosition.z *= farm.farmBreadth;
+            
             plant.transform.localPosition = localPosition;
-                    
             plant.plantInfo.currentCoordinate = new PlantCoordinate(row, col);
+
+            plant.transform.DOScaleX(3f / farm.farmWidth, 0.5f).SetEase(Ease.InOutExpo);
+            plant.transform.DOScaleY(3f, 0.5f).SetEase(Ease.InOutExpo);
+            plant.transform.DOScaleZ(3f / farm.farmBreadth, 0.5f).SetEase(Ease.InOutExpo);
+            
+            plant.transform.SetParent(transform);
+
 
             return;
         }

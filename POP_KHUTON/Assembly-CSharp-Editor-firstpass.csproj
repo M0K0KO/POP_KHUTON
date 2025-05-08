@@ -409,14 +409,20 @@
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.48f1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="DemiEditor">
+      <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Assets\Plugins\Demigiant\DemiLib\Core\Editor\DemiEditor.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Library\PackageCache\com.unity.ext.nunit@031a54704bff\net40\unity-custom\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Library\PackageCache\com.unity.nuget.newtonsoft-json@74deb55db2a0\Runtime\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="DemiLib">
+      <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Assets\Plugins\Demigiant\DemiLib\Core\DemiLib.dll</HintPath>
     </Reference>
-    <Reference Include="DemiEditor">
-      <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Assets\Plugins\Demigiant\DemiLib\Core\Editor\DemiEditor.dll</HintPath>
+    <Reference Include="DOTweenEditor">
+      <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Assets\Plugins\Demigiant\DOTween\Editor\DOTweenEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTweenProEditor">
+      <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Assets\Plugins\Demigiant\DOTweenPro\Editor\DOTweenProEditor.dll</HintPath>
     </Reference>
     <Reference Include="DOTween">
       <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
@@ -424,14 +430,8 @@
     <Reference Include="DOTweenPro">
       <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Assets\Plugins\Demigiant\DOTweenPro\DOTweenPro.dll</HintPath>
     </Reference>
-    <Reference Include="DemiLib">
-      <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Assets\Plugins\Demigiant\DemiLib\Core\DemiLib.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTweenProEditor">
-      <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Assets\Plugins\Demigiant\DOTweenPro\Editor\DOTweenProEditor.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTweenEditor">
-      <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Assets\Plugins\Demigiant\DOTween\Editor\DOTweenEditor.dll</HintPath>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Library\PackageCache\com.unity.nuget.newtonsoft-json@74deb55db2a0\Runtime\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.48f1\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\mscorlib.dll</HintPath>

@@ -46,6 +46,7 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.48f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\WorldSingleton.cs" />
     <Compile Include="Assets\Scripts01\Plants\Plant Enum\PlantLevel.cs" />
     <Compile Include="Assets\Scripts01\SSEObjectReceiver.cs" />
     <Compile Include="Assets\Scripts01\Plants\PlantController.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="Assets\Scripts01\Plants\PlantOnHover.cs" />
     <Compile Include="Assets\Scripts01\Plants\Plant.cs" />
     <Compile Include="Assets\Scripts01\UnityMainThreadDispatcher.cs" />
+    <Compile Include="Assets\Scripts01\Plants\Plant Enum\PlantRank.cs" />
     <Compile Include="Assets\Scripts\UI\SimpleRegistrationManager.cs" />
     <Compile Include="Assets\Scripts01\Plants\PlantInfo.cs" />
     <Compile Include="Assets\Scripts01\Farm\PlantsManager.cs" />
@@ -440,8 +442,8 @@
     <Reference Include="nunit.framework">
       <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Library\PackageCache\com.unity.ext.nunit@031a54704bff\net40\unity-custom\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Library\PackageCache\com.unity.nuget.newtonsoft-json@74deb55db2a0\Runtime\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="DemiLib">
+      <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Assets\Plugins\Demigiant\DemiLib\Core\DemiLib.dll</HintPath>
     </Reference>
     <Reference Include="DOTween">
       <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
@@ -449,8 +451,8 @@
     <Reference Include="DOTweenPro">
       <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Assets\Plugins\Demigiant\DOTweenPro\DOTweenPro.dll</HintPath>
     </Reference>
-    <Reference Include="DemiLib">
-      <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Assets\Plugins\Demigiant\DemiLib\Core\DemiLib.dll</HintPath>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Library\PackageCache\com.unity.nuget.newtonsoft-json@74deb55db2a0\Runtime\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.48f1\Editor\Data\NetStandard\ref\2.1.0\netstandard.dll</HintPath>

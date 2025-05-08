@@ -14,9 +14,9 @@ public class CameraController : MonoBehaviour
     // 드래그 관련 변수
     private Vector3 dragOrigin;
     private Vector3 dragDifference;
-    private bool isDragging = false;
+    public bool isDragging = false;
     private Plane groundPlane;
-
+    
     private void Start()
     {
         // 카메라가 설정되지 않았다면 현재 게임오브젝트의 카메라를 사용
@@ -25,6 +25,10 @@ public class CameraController : MonoBehaviour
         
         // 지면 평면 초기화 (Y=0 기준)
         groundPlane = new Plane(Vector3.up, Vector3.zero);
+        
+        // 디버깅용: 화면 크기와 카메라 설정 로깅
+        Debug.Log("Screen dimensions: " + Screen.width + "x" + Screen.height);
+        Debug.Log("Camera rect: " + Camera.main.rect);
     }
 
     // 이동 방향 벡터를 저장할 변수
@@ -48,13 +52,41 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    // 마우스 위치가 화면 내에 있는지 확인하는 함수
+    private bool IsMouseWithinScreen()
+    {
+        Vector3 mousePos = Input.mousePosition;
+        bool isWithin = (mousePos.x >= 0 && mousePos.x <= Screen.width && 
+                         mousePos.y >= 0 && mousePos.y <= Screen.height);
+        
+        // 화면 밖일 경우 로그 출력 (디버깅용)
+        if (!isWithin)
+        {
+            Debug.LogWarning("Mouse outside screen: " + mousePos + 
+                            " Screen: " + Screen.width + "x" + Screen.height);
+        }
+        
+        return isWithin;
+    }
+    
+    // 안전한 마우스 위치를 반환하는 함수
+    private Vector3 GetSafeMousePosition()
+    {
+        return new Vector3(
+            Mathf.Clamp(Input.mousePosition.x, 0, Screen.width),
+            Mathf.Clamp(Input.mousePosition.y, 0, Screen.height),
+            Input.mousePosition.z
+        );
+    }
+
     private void HandleDragInput()
     {
         // 마우스 버튼을 누를 때 드래그 시작점 설정
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1) && IsMouseWithinScreen())
         {
             isDragging = true;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Vector3 safeMousePos = GetSafeMousePosition();
+            Ray ray = Camera.main.ScreenPointToRay(safeMousePos);
             float entry;
             
             // 광선이 평면과 교차하는지 확인
@@ -65,30 +97,33 @@ public class CameraController : MonoBehaviour
             }
         }
         
-        // 마우스 버튼을 뗄 때 드래그 종료
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(1))
         {
             isDragging = false;
         }
         
-        // 드래그 중일 때 이동 방향 계산
-        if (isDragging && Input.GetMouseButton(0))
+        if (isDragging && Input.GetMouseButton(1) && IsMouseWithinScreen())
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Vector3 safeMousePos = GetSafeMousePosition();
+            Ray ray = Camera.main.ScreenPointToRay(safeMousePos);
             float entry;
             
             if (groundPlane.Raycast(ray, out entry))
             {
-                // 현재 광선과 평면의 교차점 계산
                 Vector3 dragCurrentPosition = ray.GetPoint(entry);
                 
-                // 드래그 차이 계산 (시작점 - 현재점)
+                // 이전 위치와 현재 위치가 너무 멀리 떨어져 있으면 보정 (텔레포트 방지)
+                float distance = Vector3.Distance(dragCurrentPosition, dragOrigin);
+                if (distance > 50f) // 적절한 값으로 조정
+                {
+                    Debug.LogWarning("거리가 너무 멀어 드래그 무시: " + distance);
+                    return;
+                }
+                
                 dragDifference = dragCurrentPosition - dragOrigin;
                 
-                // 카메라가 기울어져 있을 때 월드 좌표를 기준으로 이동 방향 설정
                 moveDirection = new Vector3(-dragDifference.x, 0, -dragDifference.z);
                 
-                // 이동 후 드래그 시작점 갱신
                 dragOrigin = dragCurrentPosition;
             }
         }
@@ -96,40 +131,35 @@ public class CameraController : MonoBehaviour
     
     private void MoveCamera(Vector3 direction)
     {
-        // 카메라 이동 (FixedUpdate에서는 Time.fixedDeltaTime 사용)
+        // 이동 방향의 크기가 비정상적으로 크면 보정
+        float magnitude = direction.magnitude;
+        if (magnitude > 10f) // 적절한 값으로 조정
+        {
+            Debug.LogWarning("비정상적인 이동 벡터 감지: " + magnitude);
+            direction = direction.normalized * 10f;
+        }
+        
         Vector3 newPosition = cameraTransform.position + direction * dragSpeed * Time.fixedDeltaTime;
         
         if (limitBoundaries)
         {
-            // X, Z 좌표를 제한 범위 내로 제한
             newPosition.x = Mathf.Clamp(newPosition.x, minBoundary.x, maxBoundary.x);
             newPosition.z = Mathf.Clamp(newPosition.z, minBoundary.y, maxBoundary.y);
         }
         
-        // 카메라 Y축 높이는 유지
         newPosition.y = cameraTransform.position.y;
         
-        // 최종 위치로 카메라 이동
+        // 이전 위치와 새 위치의 차이가 너무 크면 보정
+        float positionDelta = Vector3.Distance(newPosition, cameraTransform.position);
+        if (positionDelta > 5f) // 적절한 값으로 조정
+        {
+            Debug.LogWarning("비정상적인 위치 변화 감지: " + positionDelta);
+            Vector3 direction_normalized = (newPosition - cameraTransform.position).normalized;
+            newPosition = cameraTransform.position + direction_normalized * 5f;
+        }
+        
         cameraTransform.position = newPosition;
     }
     
-    // 기즈모로 이동 제한 범위 시각화 (에디터에서만 표시)
-    private void OnDrawGizmosSelected()
-    {
-        if (limitBoundaries)
-        {
-            Gizmos.color = Color.yellow;
-            Vector3 center = new Vector3(
-                (minBoundary.x + maxBoundary.x) * 0.5f,
-                0,
-                (minBoundary.y + maxBoundary.y) * 0.5f
-            );
-            Vector3 size = new Vector3(
-                maxBoundary.x - minBoundary.x,
-                0.1f,
-                maxBoundary.y - minBoundary.y
-            );
-            Gizmos.DrawWireCube(center, size);
-        }
-    }
+    // 기즈모 시각화 메서드 (필요하다면 다시 추가)
 }
