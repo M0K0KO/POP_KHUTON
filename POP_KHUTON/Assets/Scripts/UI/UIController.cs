@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class UIController : MonoBehaviour
 {
+    public AudioSource audioSource;
+    public AudioClip buttonSound;
+    
     public GameObject loginPanel;
     public GameObject loginFrame;
     public TMP_Text username;
@@ -30,19 +33,17 @@ public class UIController : MonoBehaviour
 
     public void OnLoginClick()
     {
+        audioSource.PlayOneShot(buttonSound);
         mainPanel.SetActive(true);
-        Sequence sequence = DOTween.Sequence();
-        sequence.Append(loginPanel.GetComponent<CanvasGroup>().DOFade(0, 0.4f));
-        sequence.Join(loginFrame.transform.DOScale(1.4f, 0.4f));
-        sequence.OnComplete((() =>
-        {
-            loginPanel.SetActive(false);
-        }));
+        
+        loginFrame.GetComponent<RectTransform>().DOScale(1.4f, 0.3f);
+        loginPanel.GetComponent<CanvasGroup>().DOFade(0, 0.4f).OnComplete(()=>loginPanel.SetActive(false));
 
     }
 
     public void OnSignUpClick()
     {
+        audioSource.PlayOneShot(buttonSound);
         loginFrame.GetComponent<CanvasGroup>().blocksRaycasts = false;
         loginFrame.GetComponent<CanvasGroup>().DOFade(0, 0.4f).OnComplete((() => 
         {
@@ -59,6 +60,7 @@ public class UIController : MonoBehaviour
 
     public void OnSignUpCompleteClick()
     {
+        audioSource.PlayOneShot(buttonSound);
         loginFrame.SetActive(true);
         loginFrame.GetComponent<CanvasGroup>().alpha = 1;
         loginFrame.GetComponent<CanvasGroup>().blocksRaycasts = false;

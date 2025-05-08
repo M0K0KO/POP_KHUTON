@@ -818,11 +818,11 @@
     <Reference Include="Unity.Mathematics.Editor">
       <HintPath>D:\2025_KHUTON\POP_KHUTON\POP_KHUTON\Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Rider.Editor">
-      <HintPath>D:\2025_KHUTON\POP_KHUTON\POP_KHUTON\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
       <HintPath>D:\2025_KHUTON\POP_KHUTON\POP_KHUTON\Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Rider.Editor">
+      <HintPath>D:\2025_KHUTON\POP_KHUTON\POP_KHUTON\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Multiplayer.Center.Common">
       <HintPath>D:\2025_KHUTON\POP_KHUTON\POP_KHUTON\Library\ScriptAssemblies\Unity.Multiplayer.Center.Common.dll</HintPath>
