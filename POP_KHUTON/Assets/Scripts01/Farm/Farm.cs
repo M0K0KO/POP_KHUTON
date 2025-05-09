@@ -15,6 +15,8 @@ public class Farm : MonoBehaviour
     
     public GameObject groundPiece;
 
+    public bool isInitialized = false;
+
     private void Awake()
     {
         if (null == instance)
@@ -29,16 +31,11 @@ public class Farm : MonoBehaviour
         
         meshRenderer = GetComponent<MeshRenderer>();
         plantsManager = GetComponent<PlantsManager>();
-        
-        farmWidth = meshRenderer.bounds.size.x;
-        farmBreadth = meshRenderer.bounds.size.z;
-        
     }
 
     private void Start()
     {
         meshRenderer.enabled = false;
-        InitializeFarm();
     }
 
     private Vector3 groundPosition(int x, int z)

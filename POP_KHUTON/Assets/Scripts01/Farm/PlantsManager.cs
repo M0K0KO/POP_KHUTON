@@ -25,7 +25,6 @@ public class PlantsManager : MonoBehaviour
 
     private void Start()
     {
-        MakePlantsList();
     }
 
     ////////////////////////////
@@ -35,7 +34,7 @@ public class PlantsManager : MonoBehaviour
     }
     ////////////////////////////
 
-    private void MakePlantsList()
+    public void MakePlantsList()
     {
         rowSize = (int)(farm.farmWidth / cellSize);
         colSize = (int)(farm.farmBreadth / cellSize);
@@ -65,6 +64,8 @@ public class PlantsManager : MonoBehaviour
     {
         GameObject instantiatedPlant = Instantiate(plantPrefab, transform.position, Quaternion.identity);
         Plant plant = instantiatedPlant.GetComponent<Plant>();
+        
+        Debug.Log(row + "," + col);
         
         if (plantList[row, col] == null)
         {

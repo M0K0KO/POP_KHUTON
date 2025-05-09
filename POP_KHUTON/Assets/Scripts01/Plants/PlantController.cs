@@ -1,5 +1,6 @@
 using System;
 using cakeslice;
+using DG.Tweening;
 using UnityEngine;
 
 public class PlantController : MonoBehaviour
@@ -56,17 +57,30 @@ public class PlantController : MonoBehaviour
         targetMesh.enabled = true;
     }
 
-    private void HandlePlantLevelChange()
+    private void HandlePlantLevelChange(PlantLevel prevLevel)
     {
         DisableAllActiveMeshRenderers();
         
         PlantType currentType = plant.plantInfo.plantType;
         PlantLevel currentLevel = plant.plantInfo.plantLevel;
 
+        Debug.Log(currentType + "_" + currentLevel);
+        
         MeshRenderer targetMesh = transform.Find(currentType + "_" + currentLevel).GetComponent<MeshRenderer>();
         currentActiveRenderer = targetMesh;
         currentOutline = targetMesh.GetComponent<Outline>();
         targetMesh.enabled = true;
+
+        if (prevLevel != plant.plantInfo.plantLevel)
+        {
+            plant.transform.DOScaleX(1f / Farm.instance.farmWidth, 0f);
+            plant.transform.DOScaleY(1f, 0f);
+            plant.transform.DOScaleZ(1f / Farm.instance.farmBreadth, 0f);
+
+            plant.transform.DOScaleX(3f / Farm.instance.farmWidth, 0.5f).SetEase(Ease.InOutExpo);
+            plant.transform.DOScaleY(3f, 0.5f).SetEase(Ease.InOutExpo);
+            plant.transform.DOScaleZ(3f / Farm.instance.farmBreadth, 0.5f).SetEase(Ease.InOutExpo);
+        }
     }
     
     public void DisableAllActiveMeshRenderers()
@@ -74,11 +88,8 @@ public class PlantController : MonoBehaviour
         MeshRenderer[] childRenderers = GetComponentsInChildren<MeshRenderer>(true);
         
         foreach (MeshRenderer renderer in childRenderers)
-        {
-            if (renderer.enabled)
-            {
-                renderer.enabled = false;
-            }
+        { 
+            renderer.enabled = false;
         }
     }
 
@@ -90,12 +101,18 @@ public class PlantController : MonoBehaviour
 
     public void ChangeLevel(PlantLevel plantLevel)
     {
-        if (plantLevel == PlantLevel.Lv4)
+        if (plantLevel == PlantLevel.Lv4 && plant.plantInfo.plantLevel != PlantLevel.Lv4)
         {
-            
+            Debug.Log("이새끼 아픔;;");
+        }
+
+        if (plantLevel == PlantLevel.Lv3 && plant.plantInfo.plantLevel != PlantLevel.Lv3)
+        {
+            Debug.Log("다 컸다!!");
         }
         
+        PlantLevel prevLevel = plant.plantInfo.plantLevel;
         plant.plantInfo.plantLevel = plantLevel;
-        HandlePlantLevelChange();
+        HandlePlantLevelChange(prevLevel);
     }
 }
