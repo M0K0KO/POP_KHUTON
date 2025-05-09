@@ -210,11 +210,16 @@ public class SSEObjectReceiver : MonoBehaviour
                 // Debug.Log($"Sector [{sectorKey}]: Found {objectsInSector.Count} object(s).");
                 foreach (NewDetectedObjectInfo objInfo in objectsInSector)
                 {
-                    if (objInfo.sector_row == null) continue;
-
-                    if (Farm.instance.plantsManager.plantList[objInfo.sector_row, objInfo.sector_col] == null)
+                    if (objInfo == null) continue;
+                    else
                     {
-                        Farm.instance.plantsManager.AddPlant(objInfo.sector_row, objInfo.sector_col);
+                        if (Farm.instance.plantsManager.plantList[objInfo.sector_row, objInfo.sector_col] == null)
+                        {
+                            // plant가 없었는데 생긴 경우
+                            Farm.instance.plantsManager.AddPlant(objInfo.sector_row, objInfo.sector_col);
+                        }
+
+                        Farm.instance.plantsManager.visitedPlant[objInfo.sector_row, objInfo.sector_col] = true;
                     }
 
                     PlantType type = PlantType.Cabbage;
@@ -235,6 +240,19 @@ public class SSEObjectReceiver : MonoBehaviour
                         type,
                         lv
                     );
+
+                    for (int x = 0; x < (int)(Farm.instance.farmWidth / Farm.instance.cellSize); x++)
+                    {
+                        for (int z = 0; z < (int)(Farm.instance.farmBreadth / Farm.instance.cellSize); z++)
+                        {
+                            bool isVisited = Farm.instance.plantsManager.visitedPlant[x, z];
+                            bool plantExistence = (Farm.instance.plantsManager.plantList[x, z] == null) ? false : true;
+                            if (!isVisited && plantExistence)
+                            {
+                                Farm.instance.plantsManager.HarvestPlant(x, z);
+                            }
+                        }
+                    }
 
                     // Access objInfo.sector_row, objInfo.sector_col, objInfo.Level, objInfo.ObjectType
                     // Example:

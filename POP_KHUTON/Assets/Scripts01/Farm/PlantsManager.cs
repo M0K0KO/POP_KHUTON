@@ -10,6 +10,7 @@ public class PlantsManager : MonoBehaviour
     private int rowSize = 0;
     private int colSize = 0;
     public Plant[,] plantList;
+    public bool[,] visitedPlant;
     private Farm farm;
 
     private float cellSize;
@@ -39,6 +40,7 @@ public class PlantsManager : MonoBehaviour
         rowSize = (int)(farm.farmWidth / cellSize);
         colSize = (int)(farm.farmBreadth / cellSize);
         plantList = new Plant[rowSize, colSize];
+        visitedPlant = new bool[rowSize, colSize];
     }
     
     private Vector3 plantPosition(int x, int z)
@@ -94,7 +96,39 @@ public class PlantsManager : MonoBehaviour
             plantList[row, col].plantController.ChangeType(plantType);
             plantList[row, col].plantController.ChangeLevel(plantLevel);
 
+            switch (plantLevel)
+            {
+                case PlantLevel.Lv1:
+                    plantList[row, col].plantInfo.rank = PlantRank.C;
+                    break;
+                case PlantLevel.Lv2:
+                    plantList[row, col].plantInfo.rank = PlantRank.B;
+                    break;
+                case PlantLevel.Lv3:
+                    plantList[row, col].plantInfo.rank = PlantRank.A;
+                    break;
+                case PlantLevel.Lv4:
+                    plantList[row, col].plantInfo.rank = PlantRank.D;
+                    break;
+            }
+
             plant.plantController.currentOutline.enabled = false;
         }
+    }
+
+    public void HarvestPlant(int row, int col)
+    {
+        Plant targetPlant = plantList[row, col];
+        WorldSingleton.instance.harvestedPlants.Add(targetPlant);
+        
+        Material material = targetPlant.plantController.currentActiveRenderer.material;
+        Sequence sequence = DOTween.Sequence();
+
+        sequence.Append(material.DOFade(0f, 0.5f).SetEase(Ease.Linear));
+        sequence.Join(targetPlant.transform.DOMoveY(10f, 0.5f).SetEase(Ease.Linear));
+
+        sequence.OnComplete(() => {
+            Destroy(targetPlant.gameObject);
+        });
     }
 }

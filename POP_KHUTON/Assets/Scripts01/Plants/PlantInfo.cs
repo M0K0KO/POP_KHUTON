@@ -7,7 +7,6 @@ public class PlantInfo : MonoBehaviour
     public PlantType plantType;
     public PlantLevel plantLevel;
     public PlantRank rank;
-    public int weight;
 
     private void Awake()
     {
