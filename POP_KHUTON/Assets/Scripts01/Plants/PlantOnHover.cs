@@ -56,6 +56,16 @@ public class PlantOnHover : MonoBehaviour
                 // UI 창 활성화 및 애니메이션
                 if (WorldSingleton.instance != null && WorldSingleton.instance.plantDetailWindow != null)
                 {
+                    PlantDetailWindow plantDetailWindow = WorldSingleton.instance.plantDetailWindow.GetComponent<PlantDetailWindow>();
+                    plantDetailWindow.plantName.text = plant.plantInfo.plantType.ToString();
+                    plantDetailWindow.plantRank.text = plant.plantInfo.rank.ToString();
+                    plantDetailWindow.plantStatus.text = plant.plantInfo.PlantStatusByRank();
+                    plantDetailWindow.plantImage.sprite = plant.plantInfo.PlantImageByInfo();
+                    
+                    /////////////////////////////////////////////////// 바꿔야함
+                    plantDetailWindow.plantDescription.text = plant.plantInfo.PlantStatusByRank();
+                    /////////////////////////////////////////////////// 바꿔야함
+                    
                     WorldSingleton.instance.plantDetailWindow.SetActive(true);
                     WorldSingleton.instance.plantDetailWindow.GetComponent<RectTransform>()
                         .DOAnchorPosX(-565, 0.5f)

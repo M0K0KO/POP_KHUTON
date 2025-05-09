@@ -160,6 +160,4 @@ public class CameraController : MonoBehaviour
         
         cameraTransform.position = newPosition;
     }
-    
-    // 기즈모 시각화 메서드 (필요하다면 다시 추가)
 }

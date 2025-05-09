@@ -13,6 +13,21 @@ public class WorldSingleton : MonoBehaviour
     public GameObject plantDetailWindow;
     public List<Plant> harvestedPlants;
 
+    public Sprite v1_cabbage;
+    public Sprite v2_cabbage;
+    public Sprite v3_cabbage;
+    public Sprite v4_cabbage;
+    
+    public Sprite v1_tomato;
+    public Sprite v2_tomato;
+    public Sprite v3_tomato;
+    public Sprite v4_tomato;
+
+    public Sprite v1_eggplant;
+    public Sprite v2_eggplant;
+    public Sprite v3_eggplant;
+    public Sprite v4_eggplant;
+    
     private string serverUrl = "";
     
     private void Awake()
@@ -23,6 +38,25 @@ public class WorldSingleton : MonoBehaviour
         harvestedPlants = new List<Plant>();
     }
 
+    private void Start()
+    {
+        v1_cabbage = Resources.Load<Sprite>("Crops/v1_cabbage");
+        v2_cabbage = Resources.Load<Sprite>("Crops/v2_cabbage");
+        v3_cabbage = Resources.Load<Sprite>("Crops/v3_cabbage");
+        v4_cabbage = Resources.Load<Sprite>("Crops/v4_cabbage");
+        
+        v1_tomato = Resources.Load<Sprite>("Crops/v1_tomato");
+        v2_tomato = Resources.Load<Sprite>("Crops/v2_tomato");
+        v3_tomato = Resources.Load<Sprite>("Crops/v3_tomato");
+        v4_tomato = Resources.Load<Sprite>("Crops/v4_tomato");
+        
+        v1_eggplant = Resources.Load<Sprite>("Crops/v1_eggplant");
+        v2_eggplant = Resources.Load<Sprite>("Crops/v2_eggplant");
+        v3_eggplant = Resources.Load<Sprite>("Crops/v3_eggplant");
+        v4_eggplant = Resources.Load<Sprite>("Crops/v4_eggplant");
+    }
+
+    #region JSONProcessing
     private void DumpHarvestedPlantsIntoJson()
     {
         HarvestedPlantListWrapper wrapper = new HarvestedPlantListWrapper
@@ -82,7 +116,7 @@ public class WorldSingleton : MonoBehaviour
         request.Dispose();
     }
 
-    private string PlantTypeToString(PlantType plantType)
+    public string PlantTypeToString(PlantType plantType)
     {
         switch (plantType)
         {
@@ -96,23 +130,23 @@ public class WorldSingleton : MonoBehaviour
         return "error";
     }
 
-    private string PlantLevelToString(PlantLevel plantLevel)
+    public string PlantLevelToString(PlantLevel plantLevel)
     {
         switch (plantLevel)
         {
             case PlantLevel.Lv1:
-                return "lv1";
+                return "v1";
             case PlantLevel.Lv2:
-                return "lv2";
+                return "v2";
             case PlantLevel.Lv3:
-                return "lv3";
+                return "v3";
             case PlantLevel.Lv4:
-                return "lv4";
+                return "v4";
         }
         return "error";
     }
 
-    private string PlantRankToString(PlantRank plantRank)
+    public string PlantRankToString(PlantRank plantRank)
     {
         switch (plantRank)
         {
@@ -127,6 +161,7 @@ public class WorldSingleton : MonoBehaviour
         }
         return "error";
     }
+    #endregion
 }
 
 public class JsonPlant
