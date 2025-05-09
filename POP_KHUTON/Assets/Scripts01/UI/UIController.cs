@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class UIController : MonoBehaviour
 {
-    public SimpleRegistrationManager registrationManager;
+    public Canvas canvas;
     
+    public SimpleRegistrationManager registrationManager;
+
     public AudioSource audioSource;
     public AudioClip buttonSound;
-    
+
     public GameObject loginPanel;
     public GameObject loginFrame;
     public TMP_InputField usernameInput;
@@ -21,15 +23,21 @@ public class UIController : MonoBehaviour
     public TMP_InputField signUpPasswordInput;
 
     public GameObject mainPanel;
-    
-    
+
+    public GameObject plantInfoPanel;
+
+    public GameObject shopPanel;
+
+
 
     private void Awake()
     {
+        canvas = GetComponent<Canvas>();
         loginPanel.SetActive(true);
         mainPanel.SetActive(false);
         signUpPanel.SetActive(false);
         signUpPanel.GetComponent<CanvasGroup>().alpha = 0;
+        shopPanel.SetActive(false);
     }
 
 
@@ -37,9 +45,9 @@ public class UIController : MonoBehaviour
     {
         audioSource.PlayOneShot(buttonSound);
         mainPanel.SetActive(true);
-        
+
         loginFrame.GetComponent<RectTransform>().DOScale(1.4f, 0.3f);
-        loginPanel.GetComponent<CanvasGroup>().DOFade(0, 0.4f).OnComplete(()=>loginPanel.SetActive(false));
+        loginPanel.GetComponent<CanvasGroup>().DOFade(0, 0.4f).OnComplete(() => loginPanel.SetActive(false));
 
     }
 
@@ -47,7 +55,7 @@ public class UIController : MonoBehaviour
     {
         audioSource.PlayOneShot(buttonSound);
         loginFrame.GetComponent<CanvasGroup>().blocksRaycasts = false;
-        loginFrame.GetComponent<CanvasGroup>().DOFade(0, 0.4f).OnComplete((() => 
+        loginFrame.GetComponent<CanvasGroup>().DOFade(0, 0.4f).OnComplete((() =>
         {
             loginFrame.GetComponent<CanvasGroup>().blocksRaycasts = true;
         }));
@@ -57,7 +65,7 @@ public class UIController : MonoBehaviour
         {
             signUpPanel.GetComponent<CanvasGroup>().blocksRaycasts = true;
         }));
-        
+
     }
 
     public void OnSignUpCompleteClick()
@@ -76,7 +84,7 @@ public class UIController : MonoBehaviour
 
         registrationManager.RegisterUser(signUpUsernameInput.text, signUpPasswordInput.text,
             signUpNicknameInput.text, registrationManager.HandleRegistrationResult);
-        
+
     }
 
     public void OnSignUpExitClick()
@@ -94,6 +102,29 @@ public class UIController : MonoBehaviour
         }));
 
     }
-    
-    
+
+    public void OnPlantStatusShopClick()
+    {
+        audioSource.PlayOneShot(buttonSound);
+        plantInfoPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        shopPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        shopPanel.GetComponent<RectTransform>().anchoredPosition += new Vector2(canvas.GetComponent<RectTransform>().rect.width, 0);
+        shopPanel.SetActive(true);
+        shopPanel.GetComponent<RectTransform>().DOAnchorPosX(0, 0.4f, true).SetEase(Ease.OutSine).OnComplete(()=>shopPanel.GetComponent<CanvasGroup>().blocksRaycasts = true);
+        
+    }
+
+    public void OnShopExitClick()
+    {
+        audioSource.PlayOneShot(buttonSound);
+        shopPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        Vector2 targetPos = shopPanel.GetComponent<RectTransform>().anchoredPosition + new Vector2(canvas.GetComponent<RectTransform>().rect.width, 0);
+        shopPanel.GetComponent<RectTransform>().DOAnchorPosX(targetPos.x, 0.4f, true).SetEase(Ease.OutSine).OnComplete(() =>
+        {
+            shopPanel.SetActive(false);
+            plantInfoPanel.GetComponent<CanvasGroup>().blocksRaycasts = true;
+        });
+    }
+
+
 }
