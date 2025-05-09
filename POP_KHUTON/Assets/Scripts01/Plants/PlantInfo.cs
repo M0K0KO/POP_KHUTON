@@ -38,9 +38,6 @@ public class PlantInfo : MonoBehaviour
         string total = lv + "_" + type;
         Sprite result = Resources.Load<Sprite>("Crops/" + total);
         
-        Debug.Log(total);
-        if(result == null) Debug.Log("shit");
-        
         return result;
     }
 }

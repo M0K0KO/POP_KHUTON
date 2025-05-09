@@ -1,14 +1,14 @@
 using UnityEngine;
 using System.Collections.Generic;
-using Newtonsoft.Json; // Newtonsoft.Json ÆÐÅ°Áö ÇÊ¿ä
+using Newtonsoft.Json; // Newtonsoft.Json ï¿½ï¿½Å°ï¿½ï¿½ ï¿½Ê¿ï¿½
 using System.Net.Http;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System;
-// using UnityEngine.PlayerLoop; // ºÒÇÊ¿äÇÏ¿© Á¦°Å
+// using UnityEngine.PlayerLoop; // ï¿½ï¿½ï¿½Ê¿ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-// ¼­¹öÀÇ UserBase, UserResponse ¸ðµ¨¿¡ ÇØ´ç (id, nickname, level, exp)
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ UserBase, UserResponse ï¿½ðµ¨¿ï¿½ ï¿½Ø´ï¿½ (id, nickname, level, exp)
 [System.Serializable]
 public class UserAuthResponseData
 {
@@ -23,7 +23,7 @@ public class UserAuthResponseData
     }
 }
 
-// ¼­¹öÀÇ NewDetectedObjectInfo ¸ðµ¨¿¡ ÇØ´ç
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ NewDetectedObjectInfo ï¿½ðµ¨¿ï¿½ ï¿½Ø´ï¿½
 [System.Serializable]
 public class NewDetectedObjectInfo
 {
@@ -35,14 +35,14 @@ public class NewDetectedObjectInfo
     public string ObjectType;
 }
 
-// FastAPI ¼­¹öÀÇ UserDataResponse ¸ðµ¨ (YOLO ¼­¹öÀÇ /user_data/ ÀÀ´ä¿ë)
+// FastAPI ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ UserDataResponse ï¿½ï¿½ (YOLO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ /user_data/ ï¿½ï¿½ï¿½ï¿½ï¿½)
 [System.Serializable]
 public class UserDataResponse // Combined data from main server's /user_data/
 {
     public string id;
     public string nickname;
-    public int? level; // ¼­¹ö ÀÀ´ä¿¡ µû¶ó Nullable Ã³¸®
-    public int? exp;   // ¼­¹ö ÀÀ´ä¿¡ µû¶ó Nullable Ã³¸®
+    public int? level; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ä¿¡ ï¿½ï¿½ï¿½ï¿½ Nullable Ã³ï¿½ï¿½
+    public int? exp;   // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ä¿¡ ï¿½ï¿½ï¿½ï¿½ Nullable Ã³ï¿½ï¿½
     public Dictionary<string, List<NewDetectedObjectInfo>> detection_data;
 
     public override string ToString()
@@ -55,8 +55,8 @@ public class UserDataResponse // Combined data from main server's /user_data/
 public class SSEObjectReceiver : MonoBehaviour
 {
     [Header("Server Base Addresses")]
-    public string mainServerBaseAddress = "http://localhost:8000"; // SSE ¹× /user_data/ ¿£µåÆ÷ÀÎÆ® ¿ë (YOLO ¼­¹ö)
-    public string authServerBaseAddress = "http://localhost:8001"; // ÀÎÁõ °ü·Ã ¿£µåÆ÷ÀÎÆ® ¿ë (Auth ¼­¹ö)
+    public string mainServerBaseAddress = "http://localhost:8000"; // SSE ï¿½ï¿½ /user_data/ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ (YOLO ï¿½ï¿½ï¿½ï¿½)
+    public string authServerBaseAddress = "http://localhost:8001"; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ (Auth ï¿½ï¿½ï¿½ï¿½)
 
     [Header("Endpoint Paths (Main Server - Port 8000)")]
     public string sseStreamPath = "/detection_stream";
@@ -72,7 +72,7 @@ public class SSEObjectReceiver : MonoBehaviour
     [Header("SSE Connection Settings")]
     public float reconnectDelaySeconds = 5.0f;
     [Tooltip("This ID is used for establishing the SSE connection. Set it after successful login or from game settings/PlayerPrefs.")]
-    public string sseTargetUserId = "defaultUser"; // SSE ¿¬°á ´ë»ó »ç¿ëÀÚ ID
+    public string sseTargetUserId = "defaultUser"; // SSE ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ID
 
 
     private HttpClient httpClient;
@@ -106,11 +106,7 @@ public class SSEObjectReceiver : MonoBehaviour
 
     public void StartSseConnectionForCurrentUser()
     {
-        if (string.IsNullOrEmpty(this.sseTargetUserId) || this.sseTargetUserId == "defaultUser")
-        {
-            Debug.LogError($"[SSEObjectReceiver] Cannot start SSE: sseTargetUserId is not set to a specific user ('{this.sseTargetUserId}'). Please login or set it appropriately.");
-            return;
-        }
+        
         if (httpClient == null)
         {
             Debug.LogError("[SSEObjectReceiver] HttpClient not initialized. Cannot start SSE connection.");
@@ -394,7 +390,7 @@ public class SSEObjectReceiver : MonoBehaviour
         if (httpClient == null) { Debug.LogError("[SSEObjectReceiver] HttpClient not initialized."); return null; }
         if (string.IsNullOrEmpty(userIdToFetch)) { Debug.LogError("[SSEObjectReceiver] userIdToFetch cannot be null or empty."); return null; }
 
-        // FastAPI /users/me/´Â current_user_id¸¦ Query Parameter·Î ¹ÞÀ½
+        // FastAPI /users/me/ï¿½ï¿½ current_user_idï¿½ï¿½ Query Parameterï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         string endpointUrl = $"{authServerBaseAddress}{userGetMePath}?current_user_id={Uri.EscapeDataString(userIdToFetch)}";
         Debug.Log($"[SSEObjectReceiver] Fetching info for user '{userIdToFetch}' from: {endpointUrl}");
 
@@ -471,7 +467,7 @@ public class SSEObjectReceiver : MonoBehaviour
 
     #endregion
 
-    // »ç¿ëÀÚ°¡ Á¦°øÇÑ UpdateDetectionInfoInUnity ¸Þ¼­µå (Farm °ü·Ã ÁÖ¼® À¯Áö)
+    // ï¿½ï¿½ï¿½ï¿½Ú°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ UpdateDetectionInfoInUnity ï¿½Þ¼ï¿½ï¿½ï¿½ (Farm ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½ ï¿½ï¿½ï¿½ï¿½)
     void UpdateDetectionInfoInUnity(Dictionary<string, List<NewDetectedObjectInfo>> detectionData)
     {
         // Example: Log the received data. Replace with your actual game logic.
@@ -489,13 +485,12 @@ public class SSEObjectReceiver : MonoBehaviour
                 // Debug.Log($"Sector [{sectorKey}]: Found {objectsInSector.Count} object(s).");
                 foreach (NewDetectedObjectInfo objInfo in objectsInSector)
                 {
-                    /**
                     if (objInfo == null) continue;
                     else
                     {
                         if (Farm.instance.plantsManager.plantList[objInfo.sector_row, objInfo.sector_col] == null)
                         {
-                            // plant°¡ ¾ø¾ú´Âµ¥ »ý±ä °æ¿ì
+                            // plantï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Âµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
                             Farm.instance.plantsManager.AddPlant(objInfo.sector_row, objInfo.sector_col);
                         }
 
@@ -537,7 +532,6 @@ public class SSEObjectReceiver : MonoBehaviour
                             }
                         }
                     }
-                    **/
                     // Access objInfo.sector_row, objInfo.sector_col, objInfo.Level, objInfo.ObjectType
                     // Example:
                     Debug.Log($"  - Row: {objInfo.sector_row}, Col: {objInfo.sector_col}, Lv: {objInfo.Level}, Type: {objInfo.ObjectType}");

@@ -90,6 +90,11 @@ public class PlantController : MonoBehaviour
 
     public void ChangeLevel(PlantLevel plantLevel)
     {
+        if (plantLevel == PlantLevel.Lv4)
+        {
+            
+        }
+        
         plant.plantInfo.plantLevel = plantLevel;
         HandlePlantLevelChange();
     }
