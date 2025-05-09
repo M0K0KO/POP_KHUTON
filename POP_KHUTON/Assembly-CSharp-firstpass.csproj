@@ -802,11 +802,11 @@
     <Reference Include="Unity.Mathematics.Editor">
       <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Rider.Editor">
-      <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
       <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Rider.Editor">
+      <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Multiplayer.Center.Common">
       <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Library\ScriptAssemblies\Unity.Multiplayer.Center.Common.dll</HintPath>

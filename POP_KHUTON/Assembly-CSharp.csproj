@@ -53,6 +53,7 @@
     <Compile Include="Assets\Scripts01\UnityMainThreadDispatcher.cs" />
     <Compile Include="Assets\Scripts01\Plants\PlantInfo.cs" />
     <Compile Include="Assets\Scripts01\UI\UIController.cs" />
+    <Compile Include="Assets\Scripts01\AutoUITestor.cs" />
     <Compile Include="Assets\PlantDetailWindow.cs" />
     <Compile Include="Assets\Scripts01\Plants\Plant Enum\PlantLevel.cs" />
     <Compile Include="Assets\Scripts01\SSEObjectReceiver.cs" />
@@ -830,11 +831,11 @@
     <Reference Include="Unity.Mathematics.Editor">
       <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Rider.Editor">
-      <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
       <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Rider.Editor">
+      <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Multiplayer.Center.Common">
       <HintPath>C:\PORTFOLIO\POP_KHUTON\POP_KHUTON\Library\ScriptAssemblies\Unity.Multiplayer.Center.Common.dll</HintPath>

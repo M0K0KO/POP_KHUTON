@@ -157,7 +157,7 @@ public class WorldSingleton : MonoBehaviour
             case PlantRank.C:
                 return "c";
             case PlantRank.D:
-                return "d";
+                return "d"; //병든거
         }
         return "error";
     }
@@ -168,7 +168,7 @@ public class JsonPlant
 {
     [JsonProperty("type")] public string type;
     [JsonProperty("status")] public string status;
-    [JsonProperty("rank")] public string rank;
+    [JsonProperty("rank")] public string rank; 
 }
 
 public class HarvestedPlantListWrapper
